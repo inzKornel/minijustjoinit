@@ -8,8 +8,29 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "4.11.0",
+    "@material-ui/icons": "4.9.1",
+    "@material-ui/lab": "4.0.0-alpha.56",
+    "axios": "0.20.0",
+    "date-fns": "2.16.1",
+    "fontsource-roboto": "^3.0.3",
+    "mapbox-gl": "1.13.0",
     "next": "10.0.3",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-mapbox-gl": "5.1.1"
+  },
+  "devDependencies": {
+    "@types/axios": "0.14.0",
+    "@types/node": "14.14.10",
+    "@types/react": "17.0.0",
+    "@types/mapbox-gl": "0.44.3",
+    "typescript": "4.1.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }

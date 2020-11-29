@@ -1,0 +1,72 @@
+{
+  // https://paulintrognon.fr/blog/post/typescript-prettier-eslint-next-js
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "extends": ["react-app"],
+  "plugins": ["prettier", "simple-import-sort"],
+  "rules": {
+    "prettier/prettier": ["warn"],
+    "simple-import-sort/sort": "warn",
+    "sort-imports": "off",
+    "import/order": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
+    "import/no-unresolved": [2, { "ignore": ["\\.(png|jpg|svg)\\?(.*)$"] }] // fix for query params in imports
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [
+          // make an exception for vars starting with '_"
+          "warn",
+          { "argsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/naming-convention": [
+          // force consistent interface naming convention
+          "warn",
+          {
+            "selector": "interface",
+            "format": ["PascalCase"],
+            "custom": {
+              "regex": "^I[A-Z]",
+              "match": true
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "off" // turn off explicit return-types for functions
+      }
+    }
+  ],
+  "ignorePatterns": ["next.config.js"]
+}
