@@ -1,3 +1,10 @@
+## :fire: Requirements :fire:
+
+Mapbox requires apiKey to work with. 
+Copy `.env.example` -> change name to .env.local and fill missing data
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
