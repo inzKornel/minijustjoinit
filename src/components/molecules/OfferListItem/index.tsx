@@ -105,7 +105,7 @@ function OfferListItem(props: IOfferListItem) {
   const { color, imageSrc } = getCategoryImage(marker_icon);
 
   const renderContent = () => (
-    <Link href={`${process.env.BACKEND_URL}/offers/${id}`}>
+    <Link href={`/offers/${id}`}>
       <Card className={classes.card}>
         <CardContent className={classes.content}>
           <img
