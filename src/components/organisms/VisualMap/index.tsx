@@ -13,7 +13,7 @@ const Mapbox = ReactMapboxGl({
 });
 
 function VisualMap(props: IMap) {
-  const { offers, containerStyle, ...rest } = props;
+  const { offers = [], containerStyle, ...rest } = props;
 
   return (
     <Mapbox
@@ -27,7 +27,7 @@ function VisualMap(props: IMap) {
         ...containerStyle,
       }}
       //TODO: Add some validation
-      center={[offers.length && offers[0].longitude, offers && offers.length && offers[0].latitude]}
+      center={[offers.length && offers[0]?.longitude, offers && offers.length && offers[0]?.latitude]}
       zoom={[12]}
     >
       <ScaleControl />
