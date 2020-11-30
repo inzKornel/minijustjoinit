@@ -59,7 +59,7 @@ function CategoriesContainer(props: ICategoriesContainer) {
         categories.map((category) => {
           const isActive = asPath === `/all/${category.name}`;
           return (
-            <Link href={`/all/${category.name}`} key={category.id}>
+            <Link href={`${process.env.BACKEND_URL}/all/${category.name}`} key={category.id}>
               <div className={classes.imageWrapper}>
                 <img
                   alt='category image'
