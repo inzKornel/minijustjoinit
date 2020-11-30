@@ -1,5 +1,5 @@
 module.exports = {
-  basePath: '/minijustjoinit/',
+  basePath: '/minijustjoinit',
   assetPrefix: '/minijustjoinit/',
   async rewrites() {
     return [
@@ -12,8 +12,5 @@ module.exports = {
         destination: '/',
       },
     ];
-  },
-  env: {
-    BACKEND_URL: '/minijustjoinit',
   },
 };
