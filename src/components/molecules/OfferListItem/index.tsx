@@ -8,8 +8,8 @@ import { Badge, CardActions } from '@material-ui/core';
 import Link from 'next/link';
 import { getCategoryImage } from '@src/core/utils/categories';
 import { isSalary } from './utils';
-import Seniority from '@src/components/atoms/Seniority';
-import City from '@src/components/atoms/City';
+import Seniority from '@components/atoms/Seniority';
+import City from '@components/atoms/City';
 
 const useStyles = makeStyles({
   card: {
@@ -76,6 +76,7 @@ export interface IOfferListItem
     | 'company_name'
     | 'company_logo_url'
     | 'marker_icon'
+    | 'salary_currency'
   > {}
 
 function OfferListItem(props: IOfferListItem) {
@@ -87,6 +88,7 @@ function OfferListItem(props: IOfferListItem) {
     experience_level,
     salary_from,
     salary_to,
+    salary_currency,
     company_name,
     company_logo_url,
     marker_icon,
@@ -95,7 +97,7 @@ function OfferListItem(props: IOfferListItem) {
 
   const renderSalary = (salary_from: number, salary_to: number) => {
     if (isSalary(salary_from) && isSalary(salary_to)) {
-      return `${salary_from} - ${salary_to} PLN`;
+      return `${salary_from} - ${salary_to} ${salary_currency}`;
     }
     return 'Undisclosed salary';
   };
@@ -110,7 +112,7 @@ function OfferListItem(props: IOfferListItem) {
             className={classes.avatar}
             alt='Company logo'
             src={company_logo_url}
-            style={{ boxShadow: `0px 0px 16px 2px rgba(${color},0.9` }}
+            style={{ boxShadow: `0px 0px 8px 2px rgb(${color})` }}
           />
           <Typography gutterBottom variant='h4' component='p' className={classes.companyName}>
             {company_name}

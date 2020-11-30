@@ -1,12 +1,11 @@
-export interface ICategory {
-  id: string | number;
-  name: CategoriesEnum | string;
-  imageSrc: string | null;
-}
-
 export interface ICategoryAppearance {
   color: string;
   imageSrc: string;
+}
+
+export interface ICategory extends ICategoryAppearance {
+  id: string | number;
+  name: CategoriesEnum | string;
 }
 
 export enum CategoriesEnum {

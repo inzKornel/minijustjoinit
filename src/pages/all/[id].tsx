@@ -1,21 +1,30 @@
 import * as React from 'react';
-import * as offersApi from '@core/api/offers';
 import { IOffer } from '@core/models/offer';
 import { getOffersMemory } from '@core/utils/offers';
-
-export interface IOfferDetails {
-  offer: IOffer;
+import { ICategory } from '@src/core/models/category';
+import { mapCategories } from '@src/core/utils/categories';
+import Layout from '@components/organisms/Layout';
+import OffersContainer from '@components/organisms/Offers';
+export interface IOffersByCategoryPage {
+  offers: IOffer[];
+  categories: ICategory[];
 }
 
-function OfferDetails(props: IOfferDetails) {
-  return <div>Offers for category: /all/:id</div>;
+function OffersByCategoryPage(props: IOffersByCategoryPage) {
+  const { offers, categories } = props;
+
+  return (
+    <Layout categories={categories} offers={offers}>
+      <OffersContainer offers={offers} />
+    </Layout>
+  );
 }
 
-export default OfferDetails;
+export default OffersByCategoryPage;
 
-export async function getStaticPaths(props) {
-  const offers: IOffer[] = await offersApi.getOffers();
-  const paths = offers.map((offer) => `/all/${offer.marker_icon}`);
+export async function getStaticPaths() {
+  const offers = await getOffersMemory();
+  const paths = offers && offers.map((offer) => `/all/${offer.marker_icon}`);
 
   return {
     paths,
@@ -23,22 +32,16 @@ export async function getStaticPaths(props) {
   };
 }
 
-export async function getStaticProps({ params, ...rest }) {
+export async function getStaticProps({ params }: { params: { id: string } }) {
   const offers = await getOffersMemory();
-  const offersForCategory = offers?.filter((offer) => offer.marker_icon === params.id);
+  const offersByCategory = offers && offers.filter((offer) => offer.marker_icon === params.id);
+  const categoriesData: ICategory[] = mapCategories(offers);
 
-  if (offersForCategory && !offersForCategory.length) {
-    return {
-      redirect: {
-        destination: '/all',
-        permanent: false,
-      },
-    };
-  }
   // Pass post data to the page via props
   return {
     props: {
-      offers: offersForCategory,
+      offers: offersByCategory,
+      categories: categoriesData,
     },
   };
 }

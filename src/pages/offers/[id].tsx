@@ -1,21 +1,37 @@
 import * as React from 'react';
-import * as offersApi from '@core/api/offers';
 import { IOffer } from '@core/models/offer';
 import { getOffersMemory } from '@core/utils/offers';
+import { ICategory } from '@src/core/models/category';
+import OfferDetails from '@components/organisms/OfferDetails';
+import { mapCategories } from '@src/core/utils/categories';
+import { Container } from '@material-ui/core';
+import Header from '@components/organisms/Header';
+import CategoriesBar from '@components/organisms/CategoriesBar';
 
-export interface IOfferDetails {
+export interface IOfferDetailsPage {
   offer: IOffer;
+  categories: ICategory[];
 }
 
-function OfferDetails(props: IOfferDetails) {
-  return <div>OfferDetails path: /offers/:id</div>;
+function OfferDetailsPage(props: IOfferDetailsPage) {
+  const { offer, categories } = props;
+
+  return (
+    <React.Fragment>
+      <Header />
+      <Container>
+        <CategoriesBar categories={categories} />
+        <OfferDetails offer={offer} />
+      </Container>
+    </React.Fragment>
+  );
 }
 
-export default OfferDetails;
+export default OfferDetailsPage;
 
-export async function getStaticPaths(props) {
-  const offers: IOffer[] = await offersApi.getOffers();
-  const paths = offers.map((offer) => `/offers/${offer.id}`);
+export async function getStaticPaths() {
+  const offers = await getOffersMemory();
+  const paths = offers && offers.map((offer) => `/offers/${offer.id}`);
 
   return {
     paths,
@@ -23,16 +39,15 @@ export async function getStaticPaths(props) {
   };
 }
 
-export async function getStaticProps({ params, ...rest }) {
-  // params contains the post `id`.
+export async function getStaticProps({ params }: { params: { id: string } }) {
   const offers = await getOffersMemory();
-  // If the route is like /posts/1, then params.id is 1
-  const offer = offers?.find((offer) => offer.id === params.id);
+  const offer = offers && offers.find((offer) => offer.id === params.id);
+  const categories: ICategory[] = mapCategories(offers);
 
-  // Pass post data to the page via props
   return {
     props: {
       offer,
+      categories,
     },
   };
 }

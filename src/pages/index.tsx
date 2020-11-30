@@ -1,9 +1,11 @@
 import 'fontsource-roboto';
-import * as offersApi from '@core/api/offers';
 import { IOffer } from '@core/models/offer';
 import { ICategory } from '@core/models/category';
 import { mapCategories } from '@core/utils/categories';
-import HomePage from './home';
+import { getOffersMemory } from '@core/utils/offers';
+import Layout from '@components/organisms/Layout';
+import OffersContainer from '@components/organisms/Offers';
+import { isArray } from 'util';
 
 export interface IMainState {
   offers: IOffer[];
@@ -11,18 +13,25 @@ export interface IMainState {
 }
 
 export default function SSG(props: IMainState) {
-  return <HomePage {...props} />;
+  return (
+    <Layout {...props}>
+      <OffersContainer offers={props.offers} />
+    </Layout>
+  );
 }
 
 export async function getStaticProps() {
-  const offersData: IOffer[] = await offersApi.getOffers();
-  const categoriesData: ICategory[] = mapCategories(offersData);
-  //TODO: Add error handling here
+  const offers = await getOffersMemory();
+  //TODO(K.S) Add better error handling pls
+  if (!Array.isArray(offers)) {
+    // 404 or redirect
+  }
+  const categories: ICategory[] = mapCategories(offers);
 
   return {
     props: {
-      offers: offersData,
-      categories: categoriesData,
+      offers,
+      categories,
     },
   };
 }

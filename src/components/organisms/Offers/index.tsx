@@ -7,10 +7,11 @@ export interface IOffersContainer {
   offers: IOffer[];
 }
 
+//TODO(K.S) Add global theme - do not use string colors variables :(
 const useStyles = makeStyles({
   root: {
     maxHeight: 600,
-    margin: '32px 0',
+    margin: '4px 0 8px',
     padding: '32px 0',
     overflowX: 'hidden',
     background: '#303030',
@@ -42,16 +43,18 @@ function OffersContainer(props: IOffersContainer) {
 
   const { offers } = props;
   return (
-    <Paper elevation={3} className={classes.root}>
-      <Grid container justify='center' spacing={2}>
-        {offers &&
-          offers.map((offer) => (
-            <Grid key={offer.id} item>
-              <OfferListItem {...offer} />
-            </Grid>
-          ))}
-      </Grid>
-    </Paper>
+    <Grid item xs={12}>
+      <Paper elevation={3} className={classes.root}>
+        <Grid container justify='center' spacing={2}>
+          {offers &&
+            offers.map((offer) => (
+              <Grid key={offer.id} item>
+                <OfferListItem {...offer} />
+              </Grid>
+            ))}
+        </Grid>
+      </Paper>
+    </Grid>
   );
 }
 
