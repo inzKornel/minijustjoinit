@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { IOffer } from '@core/models/offer';
 import { getOffersMemory } from '@core/utils/offers';
-import { ICategory } from '@src/core/models/category';
+import { ICategory } from '@core/models/category';
 import OfferDetails from '@components/organisms/OfferDetails';
-import { mapCategories } from '@src/core/utils/categories';
+import { mapCategories } from '@core/utils/categories';
 import { Container } from '@material-ui/core';
 import Header from '@components/organisms/Header';
 import CategoriesBar from '@components/organisms/CategoriesBar';
