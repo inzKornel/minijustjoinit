@@ -3,6 +3,13 @@
 Mapbox requires apiKey to work with. 
 Copy `.env.example` -> change name to .env.local and fill missing data
 
+
+```
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.eyJ1IjoiaW56a29ybmVsIiwiYSI6ImNraTI1MGJjMTF0bnUycm1wemR6ZDU0c24ifQ.OyqdJkvyRjZiIKyiwbGsNg
+```
+
+I know i shouldn't put any sensitive data to repository and other than that provide it via environmant variables throught Ci/CD. But let's make a exception in this case :P
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
