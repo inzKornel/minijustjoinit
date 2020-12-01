@@ -6,7 +6,7 @@ import { getOffersMemory } from '@core/utils/offers';
 import Layout from '@components/organisms/Layout';
 import OffersContainer from '@components/organisms/Offers';
 import { version } from './../../package.json';
-console.info('v:', version);
+console.info('v: %s', version);
 export interface IMainState {
   offers: IOffer[];
   categories: ICategory[];
