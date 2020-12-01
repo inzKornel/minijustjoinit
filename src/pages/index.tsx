@@ -5,7 +5,6 @@ import { mapCategories } from '@core/utils/categories';
 import { getOffersMemory } from '@core/utils/offers';
 import Layout from '@components/organisms/Layout';
 import OffersContainer from '@components/organisms/Offers';
-import { isArray } from 'util';
 
 export interface IMainState {
   offers: IOffer[];
