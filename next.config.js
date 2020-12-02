@@ -1,6 +1,7 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
-  basePath: '/minijustjoinit',
-  assetPrefix: '/minijustjoinit/assets/',
+  assetPrefix: isProd ? 'https://cdn.statically.io/gh/inzkornel/inzkornel.github.io/minijustjoinit/' : '',
   async rewrites() {
     return [
       {
