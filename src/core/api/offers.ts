@@ -1,4 +1,4 @@
-import { ApiRequestException } from '@core/exceptions/ApiException';
+import { ApiRequestException } from '@src/core/exceptions/apiexception';
 import { IOffer } from '@core/models/offer';
 import axios from 'axios';
 
