@@ -1,8 +1,7 @@
 ## :fire: Requirements :fire:
 
-Mapbox requires apiKey to work with. 
-Copy `.env.example` -> change name to .env.local and fill missing data
-
+Mapbox requires apiKey to work with.
+Copy `.env.example` -> change name to .env.local or .env and fill missing data
 
 ```
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.eyJ1IjoiaW56a29ybmVsIiwiYSI6ImNraTI1MGJjMTF0bnUycm1wemR6ZDU0c24ifQ.OyqdJkvyRjZiIKyiwbGsNg
