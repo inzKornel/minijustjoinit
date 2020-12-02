@@ -1,5 +1,5 @@
 import * as offersApi from '@core/api/offers';
-import { SingleOfferException } from '@core/exceptions/SingleOfferException';
+import { SingleOfferException } from '@src/core/exceptions/singleofferexception';
 import { IOffer } from '@core/models/offer';
 import { addMinutes, isAfter, subMinutes } from 'date-fns';
 
