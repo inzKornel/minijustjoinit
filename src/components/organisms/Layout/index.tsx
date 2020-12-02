@@ -6,7 +6,7 @@ import Header from '@components/organisms/Header';
 import { ICategory } from '@core/models/category';
 import { IOffer } from '@core/models/offer';
 import VisualMap from '@components/organisms/VisualMap';
-import { Grid, makeStyles, Paper } from '@material-ui/core';
+import { Grid, makeStyles, Paper, Theme } from '@material-ui/core';
 
 export interface ILayout {
   offers: IOffer[];
@@ -14,16 +14,18 @@ export interface ILayout {
   children?: React.ReactNode;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   grid: {
     position: 'relative',
     margin: '4px 0',
   },
   root: {
-    minWidth: 600,
-    minHeight: 600,
+    [theme.breakpoints.up('md')]: {
+      minWidth: 600,
+      minHeight: 600,
+    },
   },
-});
+}));
 
 function Layout({ offers, categories, children }: ILayout) {
   const classes = useStyles();

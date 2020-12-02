@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Container } from '@material-ui/core';
+import Link from 'next/link';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,9 +34,11 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar position='static' className={classes.appbar}>
         <Container>
-          <Typography variant='h6' className={classes.title}>
-            Mini JustJoint<span className={classes.it}>.IT</span>
-          </Typography>
+          <Link href='/'>
+            <Typography variant='h6' className={classes.title}>
+              Mini JustJoint<span className={classes.it}>.IT</span>
+            </Typography>
+          </Link>
         </Container>
       </AppBar>
     </div>

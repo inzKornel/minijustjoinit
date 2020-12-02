@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   link: {
     color: '#2196f3',
+    wordBreak: 'break-all',
   },
 }));
 
