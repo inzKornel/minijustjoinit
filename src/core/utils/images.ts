@@ -3,7 +3,7 @@ export const cdnImage = (name: string, placeholder: boolean, folder = '/assets',
     if (placeholder) {
       return 'https://cdn.statically.io/img/inzkornel.github.io/minijustjoinit/h=' + count + '/' + folder + '/' + name;
     } else {
-      return 'https://cdn.statically.io/img/inzkornel.github.io/minijustjoinit/f=auto/' + folder + '/' + name;
+      return 'https://cdn.statically.io/img/inzkornel.github.io/minijustjoinit' + folder + '/' + name;
     }
   } else {
     return folder + '/' + name;
