@@ -6,7 +6,7 @@ import OfferDetails from '@components/organisms/OfferDetails';
 import { mapCategories } from '@core/utils/categories';
 import { Container } from '@material-ui/core';
 import Header from '@components/organisms/Header';
-import CategoriesBar from '@components/organisms/CategoriesBar';
+import CategoriesBar from '@src/components/organisms/CategoriesBar';
 
 export interface IOfferDetailsPage {
   offer: IOffer;

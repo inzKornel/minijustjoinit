@@ -1,29 +1,32 @@
-import OfferListItem from '@components/molecules/OfferListItem';
-import { IOffer } from '@core/models/offer';
-import { Grid, makeStyles, Paper } from '@material-ui/core';
+//external
 import * as React from 'react';
+import { Grid, makeStyles, Paper, Theme } from '@material-ui/core';
+
+//internal
+import { IOffer } from '@core/models/offer';
+import OfferListItem from '@components/molecules/OfferListItem';
 
 export interface IOffersContainer {
   offers: IOffer[];
 }
 
 //TODO(K.S) Add global theme - do not use string colors variables :(
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     maxHeight: 600,
     margin: '4px 0 8px',
     padding: '32px 0',
     overflowX: 'hidden',
-    background: '#303030',
+    background: theme.palette.background.paper,
     '&::-webkit-scrollbar': {
       width: '6px',
-      background: '#303030',
+      background: theme.palette.background.paper,
       height: '80%',
       borderRadius: 8,
     },
 
     '&::-webkit-scrollbar-track': {
-      background: '#303030',
+      background: theme.palette.background.paper,
       borderRadius: 8,
     },
 
@@ -36,7 +39,7 @@ const useStyles = makeStyles({
       background: '#a6a6a6',
     },
   },
-});
+}));
 
 function OffersContainer(props: IOffersContainer) {
   const classes = useStyles();

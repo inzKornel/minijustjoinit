@@ -1,15 +1,13 @@
 import { AppProps } from 'next/app';
-import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../theme';
-import '../../styles/globals.css';
+import CustomThemeProvider from '@src/theme/CustommeProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
+    <CustomThemeProvider>
       <CssBaseline />
       <Component {...pageProps} />
-    </ThemeProvider>
+    </CustomThemeProvider>
   );
 }
 

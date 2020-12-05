@@ -1,5 +1,5 @@
-import { createStyles, makeStyles } from '@material-ui/core';
 import * as React from 'react';
+import { createStyles, makeStyles } from '@material-ui/core';
 
 export interface ICity {
   city: string;

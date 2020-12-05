@@ -1,9 +1,23 @@
-import { makeStyles } from '@material-ui/core';
 import * as React from 'react';
+import { makeStyles } from '@material-ui/core';
 
+interface ISeniorityColors {
+  senior: string;
+  mid: string;
+  junior: string;
+}
 export interface ISeniority {
   level: 'senior' | 'mid' | 'junior';
+  maxLevel?: number;
+  colors?: ISeniorityColors;
+  defaultDotColor?: string;
 }
+
+const defaultColors: ISeniorityColors = {
+  junior: '#757575',
+  mid: '#616161',
+  senior: '#212121',
+};
 
 const useStyles = makeStyles({
   root: {
@@ -29,27 +43,22 @@ const levelIndexes = {
   mid: 4,
   senior: 6,
 };
-const defaultDotColor = '#e0e0e0';
 
-function Seniority({ level }: ISeniority) {
+function Seniority({ level, colors, maxLevel = 6, defaultDotColor = '#e0e0e0' }: ISeniority) {
+  const colorsMapped = Object.assign({}, defaultColors, colors);
   const classes = useStyles();
   const levelPascal = level[0].toUpperCase() + level.slice(1);
-  const getColor = () => {
-    if (level === 'junior') return '#757575';
-    if (level === 'mid') return '#616161';
-    if (level === 'senior') return '#212121';
-    return defaultDotColor;
-  };
+
   const filLDotsIndex = levelIndexes[level] || 0;
 
   return (
     <div className={classes.root}>
       <p className={classes.paragraph}>{levelPascal}</p>
-      {[...Array(6).keys()].map((_, index) => (
+      {[...Array(maxLevel).keys()].map((_, index) => (
         <span
           key={index}
           className={classes.dot}
-          style={{ background: index + 1 <= filLDotsIndex ? getColor() : defaultDotColor }}
+          style={{ background: index + 1 <= filLDotsIndex ? colorsMapped[level] : defaultDotColor }}
         />
       ))}
     </div>

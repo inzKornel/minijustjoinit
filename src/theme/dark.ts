@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 // Create a theme instance.
-const theme = createMuiTheme({
+const darkTheme = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -29,6 +29,20 @@ const theme = createMuiTheme({
       },
     },
   },
+  palette: {
+    type: 'dark',
+  },
+  custom: {
+    palette: {
+      card: {
+        main: '#303030',
+      },
+      opposite: {
+        background: '#fff',
+        text: 'rgba(0, 0, 0, 0.87)',
+      },
+    },
+  },
 });
 
-export default theme;
+export default darkTheme;

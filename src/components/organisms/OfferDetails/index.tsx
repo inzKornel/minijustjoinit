@@ -1,5 +1,8 @@
+//external
 import * as React from 'react';
 import { Grid, Paper, Typography, makeStyles, Theme } from '@material-ui/core';
+
+//internal
 import { IOffer } from '@core/models/offer';
 import VisualMap from '@components/organisms/VisualMap';
 
@@ -11,15 +14,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     margin: '4px 0 8px',
     padding: 16,
-    background: '#303030',
+    background: theme.palette.background.paper,
   },
   infoContainer: {
     padding: '0 8px',
   },
   box: {
-    background: '#242424',
+    background: theme.custom.palette.card?.main, //'#242424',
     padding: 16,
-    color: '#eeeeee',
+    color: theme.palette.text.primary,
     '&:not(:first-child):not(:last-child)': {
       margin: '8px 0',
     },
@@ -39,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 24,
   },
   salary: {
-    color: '#4caf50',
+    color: theme.palette.success.main,
   },
   label: {
     fontSize: 12,
@@ -54,7 +57,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   link: {
-    color: '#2196f3',
+    color: theme.palette.info.main,
+    fontSize: '12px',
     wordBreak: 'break-all',
   },
 }));

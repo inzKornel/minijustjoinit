@@ -1,12 +1,13 @@
+//external
 import * as React from 'react';
+import { Container, Grid, makeStyles, Paper, Theme } from '@material-ui/core';
 
-import CategoriesBar from '@components/organisms/CategoriesBar';
-import Container from '@material-ui/core/Container';
-import Header from '@components/organisms/Header';
+//internal
 import { ICategory } from '@core/models/category';
 import { IOffer } from '@core/models/offer';
+import CategoriesBar from '@components/organisms/CategoriesBar';
+import Header from '@components/organisms/Header';
 import VisualMap from '@components/organisms/VisualMap';
-import { Grid, makeStyles, Paper, Theme } from '@material-ui/core';
 
 export interface ILayout {
   offers: IOffer[];

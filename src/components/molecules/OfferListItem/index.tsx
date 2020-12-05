@@ -1,23 +1,28 @@
+// external
 import * as React from 'react';
+import Link from 'next/link';
+import { Badge, CardActions, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+
+// internal core
 import { IOffer } from '@core/models/offer';
-import { Badge, CardActions } from '@material-ui/core';
-import Link from 'next/link';
-import { getCategoryImage } from '@src/core/utils/categories';
-import { isSalary } from './utils';
+import { getCategoryImage } from '@core/utils/categories';
+
+// local
 import Seniority from '@components/atoms/Seniority';
 import City from '@components/atoms/City';
+import { isSalary } from './utils';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
     width: 200,
     height: 260,
-    background: '#424242',
+    background: theme.custom.palette.card?.main,
     transition: 'transform .2s',
     '&:hover': {
       cursor: 'pointer',
@@ -28,7 +33,7 @@ const useStyles = makeStyles({
   content: {
     padding: '20px 10px',
     flexGrow: 1,
-    color: '#eeeeee',
+    color: theme.palette.text.secondary,
   },
   companyName: {
     fontSize: 14,
@@ -39,7 +44,7 @@ const useStyles = makeStyles({
     fontSize: 14,
     textAlign: 'center',
     padding: '12px 0 0',
-    color: '#4caf50',
+    color: theme.palette.success.main,
   },
   avatar: {
     padding: 4,
@@ -47,7 +52,7 @@ const useStyles = makeStyles({
     height: 50,
     display: 'flex',
     margin: '0 auto',
-    background: '#FFF',
+    background: theme.palette.grey['50'],
     borderRadius: 4,
   },
   marker: {
@@ -55,13 +60,13 @@ const useStyles = makeStyles({
     height: 25,
   },
   bottomBar: {
-    background: '#FFF',
-    color: '#616161',
+    background: theme.custom.palette.opposite?.background,
+    color: theme.custom.palette.opposite?.text,
   },
   position: {
     marginLeft: 0,
   },
-});
+}));
 
 export interface IOfferListItem
   extends Pick<
