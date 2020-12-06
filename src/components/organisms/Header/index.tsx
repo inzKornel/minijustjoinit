@@ -24,8 +24,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
     color: theme.palette.text.primary,
+    transition: 'color .3s ease-in-out',
+    '&:hover': {
+      cursor: 'pointer',
+      color: theme.palette.text.secondary,
+      transition: 'color .3s ease-in-out',
+    },
   },
   it: {
     color: theme.palette.info.light,

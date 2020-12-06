@@ -5,6 +5,7 @@ import { Grid, Paper, Typography, makeStyles, Theme } from '@material-ui/core';
 //internal
 import { IOffer } from '@core/models/offer';
 import VisualMap from '@components/organisms/VisualMap';
+import SkillMeasure from '@src/components/atoms/SkillMeasure';
 
 export interface IOfferDetails {
   offer: IOffer;
@@ -35,6 +36,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  column: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
   companyLogo: {
     width: 100,
     height: 100,
@@ -61,6 +66,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '12px',
     wordBreak: 'break-all',
   },
+  titleWrapper: {
+    width: '100%',
+  },
+  skillWrapper: {
+    display: 'flex',
+  },
 }));
 
 export interface ILabel extends React.HTMLAttributes<HTMLSpanElement> {}
@@ -78,18 +89,23 @@ function OfferDetails(props: IOfferDetails) {
       <Paper elevation={3} className={classes.root}>
         <Grid container spacing={2} className={classes.infoContainer}>
           <Grid xs={12} md={6} item>
-            <Paper elevation={2} className={`${classes.box}  ${classes.justified}`}>
-              <div>
+            <Paper elevation={2} className={`${classes.box}  ${classes.justified} ${classes.column}`}>
+              <div className={`${classes.justified} ${classes.titleWrapper}`}>
                 <Typography variant='h6' component='h2'>
                   {offer.title}
                 </Typography>
-                <Typography variant='h6' component='h2'>
-                  <Label className={classes.label}>Experience:</Label> {offer.experience_level}
+                <Typography variant='h6' component='h2' className={classes.salary}>
+                  {offer.salary_from} - {offer.salary_to} {offer.salary_currency}
                 </Typography>
               </div>
-              <Typography variant='h6' component='h2' className={classes.salary}>
-                {offer.salary_from} - {offer.salary_to} {offer.salary_currency}
+              <Typography variant='h6' component='h2'>
+                <Label className={classes.label}>Experience:</Label> {offer.experience_level}
               </Typography>
+              <div className={classes.skillWrapper}>
+                {offer.skills.map((skill, index) => (
+                  <SkillMeasure key={index} level={skill.level} title={skill.name} />
+                ))}
+              </div>
             </Paper>
             <Paper elevation={2} className={`${classes.box} ${classes.boxFlex}`}>
               <img src={offer.company_logo_url} alt='company logo' className={classes.companyLogo} />

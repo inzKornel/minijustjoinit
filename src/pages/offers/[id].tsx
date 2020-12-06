@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { Container } from '@material-ui/core';
 import { IOffer } from '@core/models/offer';
 import { getOffersMemory } from '@core/utils/offers';
+import { mapCategories } from '@core/utils/categories';
 import { ICategory } from '@core/models/category';
 import OfferDetails from '@components/organisms/OfferDetails';
-import { mapCategories } from '@core/utils/categories';
-import { Container } from '@material-ui/core';
 import Header from '@components/organisms/Header';
-import CategoriesBar from '@src/components/organisms/CategoriesBar';
+import CategoriesBar from '@components/organisms/CategoriesBar';
 
 export interface IOfferDetailsPage {
   offer: IOffer;
