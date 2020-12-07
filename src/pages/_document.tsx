@@ -11,6 +11,15 @@ export default class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name='theme-color' content={theme.palette.primary.main} />
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap' />
+          <title>MiniJustJoinIT</title>
+          <meta charSet='utf-8' />
+          <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
+          <meta
+            name='viewport'
+            content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'
+          />
+          <meta name='description' content='Simple task application with fake job offers' />
+          <link rel='manifest' href='/manifest.json' />
         </Head>
         <body>
           <Main />

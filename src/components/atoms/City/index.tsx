@@ -26,7 +26,7 @@ function City(props: ICity) {
 
   return (
     <div className={classes.root}>
-      <Image src='/assets/pin.svg' width={12} height={20} />
+      <Image src='/assets/pin.svg' alt='city marker' width={12} height={20} />
       <span className={classes.city}>{props.city}</span>
     </div>
   );

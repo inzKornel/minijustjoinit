@@ -127,7 +127,7 @@ function OfferListItem(props: IOfferListItem) {
           <City city={city} />
         </CardContent>
         <CardActions className={classes.bottomBar}>
-          <Image src={imageSrc} width={25} height={25} />
+          <Image src={imageSrc} alt='technology badge' width={25} height={25} />
           <Typography variant='caption'>{title}</Typography>
         </CardActions>
       </Card>
