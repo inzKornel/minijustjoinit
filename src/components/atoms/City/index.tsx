@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Image from 'next/image';
 import { createStyles, makeStyles } from '@material-ui/core';
 
 export interface ICity {
@@ -11,9 +12,6 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    mark: {
-      width: 12,
     },
     city: {
       paddingLeft: 8,
@@ -28,7 +26,7 @@ function City(props: ICity) {
 
   return (
     <div className={classes.root}>
-      <img src='/assets/pin.svg' className={classes.mark} />
+      <Image src='/assets/pin.svg' width={12} height={20} />
       <span className={classes.city}>{props.city}</span>
     </div>
   );

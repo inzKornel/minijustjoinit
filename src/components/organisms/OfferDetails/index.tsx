@@ -1,11 +1,16 @@
 //external
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import { Grid, Paper, Typography, makeStyles, Theme } from '@material-ui/core';
 
 //internal
 import { IOffer } from '@core/models/offer';
-import VisualMap from '@components/organisms/VisualMap';
+import VisualMap from '@src/components/molecules/VisualMap';
 import SkillMeasure from '@src/components/atoms/SkillMeasure';
+
+const NoSSRVisualMap = dynamic(() => import('@components/molecules/VisualMap'), {
+  ssr: false,
+});
 
 export interface IOfferDetails {
   offer: IOffer;
@@ -137,7 +142,10 @@ function OfferDetails(props: IOfferDetails) {
             </Paper>
           </Grid>
           <Grid xs={12} md={6} className={classes.mapContainer} item>
-            <VisualMap offers={[offer]} containerStyle={{ height: 'calc(100% - 16px)', width: 'calc(100% - 16px)' }} />
+            <NoSSRVisualMap
+              offers={[offer]}
+              containerStyle={{ height: 'calc(100% - 16px)', width: 'calc(100% - 16px)' }}
+            />
           </Grid>
         </Grid>
       </Paper>

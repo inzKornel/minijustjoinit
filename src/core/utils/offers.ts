@@ -16,11 +16,13 @@ let offersMemory: IOffersMemory = {
 /**
  * This is probably some anty-pattern. I dunno how to prevent fetching all data without /offers/:id api route
  */
-export async function getOffersMemory() {
+export async function getOffersMemory(maxInitialOffersRender = 50) {
   try {
     if (shouldFetchData(offersMemory)) {
       const offers = await OffersApi.getOffers();
-      const mappedOffers = offers.map((offer) => ({ ...offer, id: encodeURIComponent(offer.id).trim() }));
+      const mappedOffers = offers
+        .slice(0, maxInitialOffersRender) // prerender only 50 of all offers for better build performance
+        .map((offer) => ({ ...offer, id: decodeURIComponent(offer.id).trim() }));
       offersMemory.data = mappedOffers;
       offersMemory.fetchedDate = new Date();
       return mappedOffers;

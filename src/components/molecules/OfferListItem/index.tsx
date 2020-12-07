@@ -1,6 +1,7 @@
 // external
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Badge, CardActions, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: 200,
-    height: 260,
+    height: 280,
     background: theme.custom.palette.card?.main,
     transition: 'transform .2s',
     '&:hover': {
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   content: {
+    textAlign: 'center',
     padding: '20px 10px',
     flexGrow: 1,
     color: theme.palette.text.secondary,
@@ -48,16 +50,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   avatar: {
     padding: 4,
-    width: '80%',
-    height: 50,
     display: 'flex',
     margin: '0 auto',
     background: theme.palette.grey['50'],
     borderRadius: 4,
-  },
-  marker: {
-    width: 25,
-    height: 25,
   },
   bottomBar: {
     background: theme.custom.palette.opposite?.background,
@@ -113,11 +109,13 @@ function OfferListItem(props: IOfferListItem) {
     <Link href={`/offers/${id}`}>
       <Card className={classes.card}>
         <CardContent className={classes.content}>
-          <img
+          <Image
             className={classes.avatar}
             alt='Company logo'
             src={company_logo_url}
-            style={{ boxShadow: `0px 0px 8px 2px rgb(${color})` }}
+            width={'80%'}
+            height={50}
+            // style={{ boxShadow: `0px 0px 8px 2px rgb(${color})` }}
           />
           <Typography gutterBottom variant='h4' component='p' className={classes.companyName}>
             {company_name}
@@ -129,7 +127,7 @@ function OfferListItem(props: IOfferListItem) {
           <City city={city} />
         </CardContent>
         <CardActions className={classes.bottomBar}>
-          <img src={imageSrc} className={classes.marker} />
+          <Image src={imageSrc} width={25} height={25} />
           <Typography variant='caption'>{title}</Typography>
         </CardActions>
       </Card>

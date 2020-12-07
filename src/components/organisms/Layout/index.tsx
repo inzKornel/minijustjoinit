@@ -1,13 +1,17 @@
 //external
 import * as React from 'react';
 import { Container, Grid, makeStyles, Paper, Theme } from '@material-ui/core';
+import dynamic from 'next/dynamic';
 
 //internal
 import { ICategory } from '@core/models/category';
 import { IOffer } from '@core/models/offer';
 import CategoriesBar from '@components/organisms/CategoriesBar';
 import Header from '@components/organisms/Header';
-import VisualMap from '@components/organisms/VisualMap';
+
+const NoSSRVisualMap = dynamic(() => import('@components/molecules/VisualMap'), {
+  ssr: false,
+});
 
 export interface ILayout {
   offers: IOffer[];
@@ -30,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function Layout({ offers, categories, children }: ILayout) {
   const classes = useStyles();
+
   return (
     <React.Fragment>
       <Header />
@@ -38,7 +43,7 @@ function Layout({ offers, categories, children }: ILayout) {
         {children}
         <Grid item xs={12} className={classes.grid}>
           <Paper elevation={3} className={classes.root}>
-            <VisualMap offers={offers} />
+            <NoSSRVisualMap offers={offers} />
           </Paper>
         </Grid>
       </Container>

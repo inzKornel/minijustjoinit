@@ -86,7 +86,6 @@ const initialBarHight = 5; //pixels
 
 function SkillMeasure(props: ISkillMeasure) {
   const { levels, title, level = 1, maxLevel = 5 } = props;
-  console.log(level, title);
   const classes = useStyles();
   const mergedLevels = Object.assign({}, initialLevels, levels);
 
