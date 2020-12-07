@@ -1,7 +1,7 @@
-import * as offersApi from '@core/api/offers';
-import { SingleOfferException } from '@src/core/exceptions/singleofferexception';
+import { addMinutes, isAfter } from 'date-fns';
+import OffersApi from '@core/api/offers';
+import { SingleOfferException } from '@core/exceptions/singleofferexception';
 import { IOffer } from '@core/models/offer';
-import { addMinutes, isAfter, subMinutes } from 'date-fns';
 
 interface IOffersMemory {
   fetchedDate: Date | null;
@@ -16,11 +16,13 @@ let offersMemory: IOffersMemory = {
 /**
  * This is probably some anty-pattern. I dunno how to prevent fetching all data without /offers/:id api route
  */
-export async function getOffersMemory() {
+export async function getOffersMemory(maxInitialOffersRender = 50) {
   try {
     if (shouldFetchData(offersMemory)) {
-      const offers = await offersApi.getOffers();
-      const mappedOffers = offers.map((offer) => ({ ...offer, id: decodeURIComponent(offer.id).trim() }));
+      const offers = await OffersApi.getOffers();
+      const mappedOffers = offers
+        .slice(0, maxInitialOffersRender) // prerender only 50 of all offers for better build performance
+        .map((offer) => ({ ...offer, id: decodeURIComponent(offer.id).trim() }));
       offersMemory.data = mappedOffers;
       offersMemory.fetchedDate = new Date();
       return mappedOffers;
@@ -73,14 +75,3 @@ function isOffer(obj: any): obj is IOffer {
 function isArray(arr: any): arr is any[] {
   return typeof arr === 'object' && Array.isArray(arr);
 }
-
-// function isPureArrayOf<T>(arr: any[], obj: () => T): arr is T[] {
-//   if (isArray(arr)) {
-//     for (const item of arr) {
-//       if (!(item instanceof obj)) {
-//         return false;
-//       }
-//     }
-//   }
-//   return true
-// }

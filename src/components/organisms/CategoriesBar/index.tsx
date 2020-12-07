@@ -1,42 +1,42 @@
+//external
 import * as React from 'react';
-import { makeStyles, Paper } from '@material-ui/core';
-import { ICategory } from '@core/models/category';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { makeStyles, Paper, Theme } from '@material-ui/core';
+
+//internal
+import { ICategory } from '@core/models/category';
 
 export interface ICategoriesContainer {
   categories: ICategory[];
 }
 
-//TODO(K.S) Setup global theme. PLease dont use string variables as they are difficult to maintain
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     margin: '8px 0 4px',
     padding: '16px',
     display: 'flex',
     justifyContent: 'flex-start',
     flexWrap: 'wrap',
-    background: '#303030',
+    background: theme.palette.background.paper,
   },
-  imageWrapper: {
+  image: {
+    width: 40,
+    borderRadius: '50%',
+    padding: 10,
+    background: theme.palette.background.default,
+    filter: 'grayscale(100%)',
+    margin: '0 6px',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.15)',
     transition: 'transform .3s',
     '&:hover': {
       cursor: 'pointer',
       transform: 'scale(1.15)',
     },
   },
-  image: {
-    width: 40,
-    borderRadius: '50%',
-    padding: 10,
-    background: '#424242',
-    filter: 'grayscale(100%)',
-    margin: '0 6px',
-    transition: 'transform .3s',
-  },
   title: {
     fontSize: 10,
-    color: '#eeeeee',
+    color: theme.palette.text.secondary,
     textAlign: 'center',
     margin: 0,
   },
@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   active: {
     filter: 'none',
   },
-});
+}));
 
 function CategoriesContainer(props: ICategoriesContainer) {
   const { categories } = props;
@@ -60,16 +60,14 @@ function CategoriesContainer(props: ICategoriesContainer) {
           const isActive = asPath === `/all/${category.name}`;
           return (
             <Link href={`/all/${category.name}`} key={category.id}>
-              <div className={classes.imageWrapper}>
+              <div>
                 <img
                   alt='category image'
                   src={category.imageSrc}
                   className={`${classes.image}  ${isActive && classes.active} `}
                   style={{ ...(isActive ? { boxShadow: `0px 0px 16px 2px rgba(${category.color},0.9` } : {}) }}
                 />
-                <p className={classes.title} style={{ ...(isActive ? { color: `rgb(${category.color})` } : {}) }}>
-                  {category.name}
-                </p>
+                <p className={classes.title}>{category.name}</p>
               </div>
             </Link>
           );

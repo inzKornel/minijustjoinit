@@ -1,23 +1,29 @@
+// external
 import * as React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Badge, CardActions, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+
+// internal core
 import { IOffer } from '@core/models/offer';
-import { Badge, CardActions } from '@material-ui/core';
-import Link from 'next/link';
-import { getCategoryImage } from '@src/core/utils/categories';
-import { isSalary } from './utils';
+import { getCategoryImage } from '@core/utils/categories';
+
+// local
 import Seniority from '@components/atoms/Seniority';
 import City from '@components/atoms/City';
+import { isSalary } from './utils';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
     width: 200,
-    height: 260,
-    background: '#424242',
+    height: 280,
+    background: theme.custom.palette.card?.main,
     transition: 'transform .2s',
     '&:hover': {
       cursor: 'pointer',
@@ -26,9 +32,10 @@ const useStyles = makeStyles({
     },
   },
   content: {
+    textAlign: 'center',
     padding: '20px 10px',
     flexGrow: 1,
-    color: '#eeeeee',
+    color: theme.palette.text.secondary,
   },
   companyName: {
     fontSize: 14,
@@ -39,29 +46,23 @@ const useStyles = makeStyles({
     fontSize: 14,
     textAlign: 'center',
     padding: '12px 0 0',
-    color: '#4caf50',
+    color: theme.palette.success.main,
   },
   avatar: {
     padding: 4,
-    width: '80%',
-    height: 50,
     display: 'flex',
     margin: '0 auto',
-    background: '#FFF',
+    background: theme.palette.grey['50'],
     borderRadius: 4,
   },
-  marker: {
-    width: 25,
-    height: 25,
-  },
   bottomBar: {
-    background: '#FFF',
-    color: '#616161',
+    background: theme.custom.palette.opposite?.background,
+    color: theme.custom.palette.opposite?.text,
   },
   position: {
     marginLeft: 0,
   },
-});
+}));
 
 export interface IOfferListItem
   extends Pick<
@@ -108,11 +109,13 @@ function OfferListItem(props: IOfferListItem) {
     <Link href={`/offers/${id}`}>
       <Card className={classes.card}>
         <CardContent className={classes.content}>
-          <img
+          <Image
             className={classes.avatar}
             alt='Company logo'
             src={company_logo_url}
-            style={{ boxShadow: `0px 0px 8px 2px rgb(${color})` }}
+            width={'80%'}
+            height={50}
+            // style={{ boxShadow: `0px 0px 8px 2px rgb(${color})` }}
           />
           <Typography gutterBottom variant='h4' component='p' className={classes.companyName}>
             {company_name}
@@ -124,7 +127,7 @@ function OfferListItem(props: IOfferListItem) {
           <City city={city} />
         </CardContent>
         <CardActions className={classes.bottomBar}>
-          <img src={imageSrc} className={classes.marker} />
+          <Image src={imageSrc} width={25} height={25} />
           <Typography variant='caption'>{title}</Typography>
         </CardActions>
       </Card>

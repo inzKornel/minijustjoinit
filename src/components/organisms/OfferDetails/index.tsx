@@ -1,7 +1,16 @@
+//external
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import { Grid, Paper, Typography, makeStyles, Theme } from '@material-ui/core';
+
+//internal
 import { IOffer } from '@core/models/offer';
-import VisualMap from '@components/organisms/VisualMap';
+import VisualMap from '@src/components/molecules/VisualMap';
+import SkillMeasure from '@src/components/atoms/SkillMeasure';
+
+const NoSSRVisualMap = dynamic(() => import('@components/molecules/VisualMap'), {
+  ssr: false,
+});
 
 export interface IOfferDetails {
   offer: IOffer;
@@ -11,15 +20,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     margin: '4px 0 8px',
     padding: 16,
-    background: '#303030',
+    background: theme.palette.background.paper,
   },
   infoContainer: {
     padding: '0 8px',
   },
   box: {
-    background: '#242424',
+    background: theme.custom.palette.card?.main, //'#242424',
     padding: 16,
-    color: '#eeeeee',
+    color: theme.palette.text.primary,
     '&:not(:first-child):not(:last-child)': {
       margin: '8px 0',
     },
@@ -32,6 +41,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  column: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
   companyLogo: {
     width: 100,
     height: 100,
@@ -39,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 24,
   },
   salary: {
-    color: '#4caf50',
+    color: theme.palette.success.main,
   },
   label: {
     fontSize: 12,
@@ -54,8 +67,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   link: {
-    color: '#2196f3',
+    color: theme.palette.info.main,
+    fontSize: '12px',
     wordBreak: 'break-all',
+  },
+  titleWrapper: {
+    width: '100%',
+  },
+  skillWrapper: {
+    display: 'flex',
   },
 }));
 
@@ -74,18 +94,23 @@ function OfferDetails(props: IOfferDetails) {
       <Paper elevation={3} className={classes.root}>
         <Grid container spacing={2} className={classes.infoContainer}>
           <Grid xs={12} md={6} item>
-            <Paper elevation={2} className={`${classes.box}  ${classes.justified}`}>
-              <div>
+            <Paper elevation={2} className={`${classes.box}  ${classes.justified} ${classes.column}`}>
+              <div className={`${classes.justified} ${classes.titleWrapper}`}>
                 <Typography variant='h6' component='h2'>
                   {offer.title}
                 </Typography>
-                <Typography variant='h6' component='h2'>
-                  <Label className={classes.label}>Experience:</Label> {offer.experience_level}
+                <Typography variant='h6' component='h2' className={classes.salary}>
+                  {offer.salary_from} - {offer.salary_to} {offer.salary_currency}
                 </Typography>
               </div>
-              <Typography variant='h6' component='h2' className={classes.salary}>
-                {offer.salary_from} - {offer.salary_to} {offer.salary_currency}
+              <Typography variant='h6' component='h2'>
+                <Label className={classes.label}>Experience:</Label> {offer.experience_level}
               </Typography>
+              <div className={classes.skillWrapper}>
+                {offer.skills.map((skill, index) => (
+                  <SkillMeasure key={index} level={skill.level} title={skill.name} />
+                ))}
+              </div>
             </Paper>
             <Paper elevation={2} className={`${classes.box} ${classes.boxFlex}`}>
               <img src={offer.company_logo_url} alt='company logo' className={classes.companyLogo} />
@@ -117,7 +142,10 @@ function OfferDetails(props: IOfferDetails) {
             </Paper>
           </Grid>
           <Grid xs={12} md={6} className={classes.mapContainer} item>
-            <VisualMap offers={[offer]} containerStyle={{ height: 'calc(100% - 16px)', width: 'calc(100% - 16px)' }} />
+            <NoSSRVisualMap
+              offers={[offer]}
+              containerStyle={{ height: 'calc(100% - 16px)', width: 'calc(100% - 16px)' }}
+            />
           </Grid>
         </Grid>
       </Paper>
